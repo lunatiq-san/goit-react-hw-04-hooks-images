@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import { Component } from 'react';
+import axios from 'axios';
 import './App.css';
+import Searchbar from './components/Searchbar';
+import ImageGallery from './components/ImageGallery';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// Добавить в state текущую страницу
+class App extends Component {
+  state = {
+    hits: [],
+    currentPage: 1,
+  };
+
+  // Запрос происходит при сабмите формы
+  onChangeQuery = query => {
+    const { currentPage } = this.state;
+
+    axios
+      .get(
+        `https://pixabay.com/api/?q=${query}&image_type=photo&orientation=horizontal&per_page=2&page=${currentPage}&key=21837962-4cd9da589d4f9b46acd6bb393`,
+      )
+      .then(response => {
+        this.setState({ hits: response.data.hits });
+      });
+  };
+
+  render() {
+    const { hits } = this.state;
+    // Получить картинки, отрисовать на странице
+    return (
+      <>
+        <Searchbar onSubmit={this.onChangeQuery} />
+        <ImageGallery hits={hits} />
+      </>
+    );
+  }
 }
 
 export default App;
