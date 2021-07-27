@@ -6,20 +6,15 @@ class Searchbar extends Component {
     query: '',
   };
 
-  // Создать обработчик change
   handleChange = event => {
     this.setState({ query: event.currentTarget.value });
   };
 
-  // Создать обработчик submit
   handleSubmit = event => {
     event.preventDefault();
 
-    console.log('before update this.state.query: ', this.state.query);
     this.props.onSubmit(this.state.query);
     this.setState({ query: '' });
-
-    console.log('after update this.state.query: ', this.state.query);
   };
 
   render() {

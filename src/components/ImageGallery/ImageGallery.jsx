@@ -1,12 +1,9 @@
 import styles from './ImageGallery.module.css';
+import ImageGalleryItem from '../ImageGalleryItem';
 
 const ImageGallery = ({ hits }) => (
   <ul className={styles.imageGallery}>
-    {hits.map(({ id, webformatURL, tags }) => (
-      <li key={id}>
-        <img src={webformatURL} alt={tags} />
-      </li>
-    ))}
+    <ImageGalleryItem hits={hits} />
   </ul>
 );
 
