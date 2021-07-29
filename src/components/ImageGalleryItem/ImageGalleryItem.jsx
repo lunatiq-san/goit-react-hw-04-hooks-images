@@ -1,13 +1,33 @@
 import styles from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ hits }) => (
-  <>
-    {hits.map(({ id, webformatURL, tags }) => (
-      <li className={styles.item} key={id}>
-        <img src={webformatURL} alt={tags} className={styles.image} />
-      </li>
-    ))}
-  </>
-);
+import PropTypes from 'prop-types';
+
+const ImageGalleryItem = ({ image, onImageClick }) => {
+  const fullImageUrl = () => onImageClick(image.largeImageURL);
+
+  return (
+    <li className={styles.item}>
+      <img
+        src={image.webformatURL}
+        alt={image.tags}
+        className={styles.image}
+        onClick={fullImageUrl}
+      />
+    </li>
+  );
+};
+
+ImageGalleryItem.defaultProps = {
+  tags: '',
+};
+
+ImageGalleryItem.propTypes = {
+  image: PropTypes.shape({
+    largeImageURL: PropTypes.string.isRequired,
+    webformatURL: PropTypes.string.isRequired,
+    tags: PropTypes.string,
+  }).isRequired,
+  onImageClick: PropTypes.func.isRequired,
+};
 
 export default ImageGalleryItem;

@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.modalImage {
+  width: auto;
+  height: auto;
+  max-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
