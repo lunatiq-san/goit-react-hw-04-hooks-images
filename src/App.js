@@ -22,6 +22,10 @@ class App extends Component {
     if (prevState.searchQuery !== this.state.searchQuery) {
       this.fetchImages();
     }
+
+    if (prevState.currentPage > 2) {
+      this.scrollWindow();
+    }
   }
 
   handleGalleryItem = fullImageUrl => {
@@ -59,7 +63,6 @@ class App extends Component {
       })
       .catch(error => this.setState({ error }))
       .finally(() => {
-        this.scrollWindow();
         this.setState({ isLoading: false });
       });
   };
