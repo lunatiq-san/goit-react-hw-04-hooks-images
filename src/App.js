@@ -88,7 +88,13 @@ class App extends Component {
         <Searchbar onSubmit={this.onChangeQuery} />
         {error && <h1>Ooops... Something went wrong</h1>}
         {isLoading && (
-          <Loader type="Puff" color="#00BFFF" height={50} width={50} />
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height={50}
+            width={50}
+            className="loader"
+          />
         )}
         <ImageGallery images={images} onImageClick={this.handleGalleryItem} />
         {shouldRenderLoadMoreButton && <Button onClick={this.fetchImages} />}
